@@ -42,10 +42,10 @@ public class DataLoader implements ApplicationRunner {
         return new HashSet<>(Arrays.asList(cssExpert, cssAwareness, html, spring, hibernate, jpa, java, kotlin, lead));
     }
 
-    public Set<Employee> getEmployees() {
+    public Set<Employee> getEmployees(Set<Skill> skills) {
         List<Employee> employees = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            Employee username = new Employee("Firstname" + i, "Lastname" + i, "username" + i);
+            Employee username = new Employee("Firstname" + i, "Lastname" + i, "username" + i, skills);
             employees.add(username);
         }
 
@@ -58,7 +58,7 @@ public class DataLoader implements ApplicationRunner {
         skills.forEach(skillRepository::save);
 
         //employees
-        Set<Employee> employees = getEmployees();
+        Set<Employee> employees = getEmployees(skills);
         employees.forEach(emp -> employeeRepository.save(emp));
     }
 }

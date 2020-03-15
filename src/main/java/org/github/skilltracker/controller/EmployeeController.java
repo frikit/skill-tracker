@@ -29,6 +29,7 @@ public class EmployeeController {
                 .map(employee -> {
                     employee.setFirstName(newEmployee.getFirstName());
                     employee.setLastName(newEmployee.getLastName());
+                    employee.setSkill(newEmployee.getSkill());
                     employee.setUsername(newEmployee.getUsername());
                     return repository.save(employee);
                 })

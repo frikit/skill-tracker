@@ -1,8 +1,14 @@
 package org.github.skilltracker.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
+@Table(
+        uniqueConstraints = @UniqueConstraint(columnNames = {"name", "level"})
+)
 public class Skill {
 
     @Id
@@ -13,6 +19,13 @@ public class Skill {
 
     @Enumerated(EnumType.STRING)
     private SkillLevelEnum level;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "Employee_Skill",
+            joinColumns = @JoinColumn(name = "Skill_id"),
+            inverseJoinColumns = @JoinColumn(name = "Employee_id")
+    )
+    private Set<Employee> employees;
 
     protected Skill() {
     }
@@ -53,6 +66,15 @@ public class Skill {
 
     public void setLevel(SkillLevelEnum level) {
         this.level = level;
+    }
+
+    @JsonIgnore
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
     }
 
     @Override
