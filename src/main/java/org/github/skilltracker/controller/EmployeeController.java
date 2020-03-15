@@ -1,5 +1,6 @@
 package org.github.skilltracker.controller;
 
+import org.github.skilltracker.exceptions.ResourceNotFoundException;
 import org.github.skilltracker.model.Employee;
 import org.github.skilltracker.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,12 @@ public class EmployeeController {
     @GetMapping(value = "/employees", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Employee> getAllEmployees() {
         return (List<Employee>) repository.findAll();
+    }
+
+    @GetMapping(value = "/employees/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Employee getEmployee(@PathVariable String username) {
+        return repository.findByUsername(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Cant find user with username '" + username + "'"));
     }
 
     @PutMapping(value = "/employee/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
