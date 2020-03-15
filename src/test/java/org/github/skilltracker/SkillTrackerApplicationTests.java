@@ -7,7 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 class SkillTrackerApplicationTests {
 
     @Test
-    void contextLoads() {
+    void testContextIsLoaded() {
+        assert true;
     }
 
 }
