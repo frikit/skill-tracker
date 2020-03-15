@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SkillTrackerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(SkillTrackerApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(SkillTrackerApplication.class, args);
+    }
 
 }
