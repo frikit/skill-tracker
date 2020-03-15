@@ -31,6 +31,8 @@ public class EmployeeController {
                     employee.setLastName(newEmployee.getLastName());
                     employee.setSkill(newEmployee.getSkill());
                     employee.setUsername(newEmployee.getUsername());
+                    //TODO before insert employee check if skill exist
+                    //TODO and insert(hibernate level java level code?) or fail(as right now?)
                     return repository.save(employee);
                 })
                 .orElseGet(() -> repository.save(newEmployee));
